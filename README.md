@@ -24,3 +24,9 @@ python uk/analysis/pm_analysis.py
 # Code for the textbook “Fundamentals of Business Process Analysis and Modelling in IT”
 
 Companion code for the textbook by Ya. Dorohyi (Kyiv : KAI, 2026), Ukrainian and English editions. The `en/` folder contains the English electronic supplement and `en/listings/` all code listings from the book; see `en/README.md` for the description of each program and how to run it.
+
+## Ліцензія / License
+
+Код поширюється за ліцензією MIT (див. [LICENSE](LICENSE)). Дані Prozorro – відкриті дані системи публічних закупівель; бібліотека PM4Py, яку використовують програми, має власну ліцензію AGPL v3.
+
+The code is released under the MIT License (see [LICENSE](LICENSE)). Prozorro data are open public procurement data; the PM4Py library used by the programs has its own AGPL v3 licence.
