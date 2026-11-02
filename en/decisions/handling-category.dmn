@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="aerocargo_decisions" name="AeroCargo decisions"
+             namespace="http://aerocargo.example/dmn">
+  <decision id="handlingCategory" name="Shipment handling category">
+    <decisionTable id="dt_handlingCategory" hitPolicy="FIRST">
+      <input id="in_dg" label="Hazard class">
+        <inputExpression id="ie_dg" typeRef="string"><text>dgClass</text></inputExpression>
+      </input>
+      <input id="in_temp" label="Temperature regime">
+        <inputExpression id="ie_temp" typeRef="string"><text>tempRange</text></inputExpression>
+      </input>
+      <input id="in_value" label="Declared value, USD">
+        <inputExpression id="ie_value" typeRef="number"><text>declaredValueUsd</text></inputExpression>
+      </input>
+      <output id="out_cat" label="Handling category" name="category" typeRef="string"/>
+      <output id="out_check" label="Additional check" name="extraCheck" typeRef="boolean"/>
+      <rule id="r1">
+        <description>Dangerous goods</description>
+        <inputEntry id="r1_i1"><text>not(null)</text></inputEntry>
+        <inputEntry id="r1_i2"><text>-</text></inputEntry>
+        <inputEntry id="r1_i3"><text>-</text></inputEntry>
+        <outputEntry id="r1_o1"><text>"DG"</text></outputEntry>
+        <outputEntry id="r1_o2"><text>true</text></outputEntry>
+      </rule>
+      <rule id="r2">
+        <description>Cold chain</description>
+        <inputEntry id="r2_i1"><text>-</text></inputEntry>
+        <inputEntry id="r2_i2"><text>"2-8C","15-25C"</text></inputEntry>
+        <inputEntry id="r2_i3"><text>-</text></inputEntry>
+        <outputEntry id="r2_o1"><text>"COL"</text></outputEntry>
+        <outputEntry id="r2_o2"><text>false</text></outputEntry>
+      </rule>
+      <rule id="r3">
+        <description>Valuable cargo</description>
+        <inputEntry id="r3_i1"><text>-</text></inputEntry>
+        <inputEntry id="r3_i2"><text>-</text></inputEntry>
+        <inputEntry id="r3_i3"><text>&gt;= 50000</text></inputEntry>
+        <outputEntry id="r3_o1"><text>"VAL"</text></outputEntry>
+        <outputEntry id="r3_o2"><text>true</text></outputEntry>
+      </rule>
+      <rule id="r4">
+        <description>Default rule</description>
+        <inputEntry id="r4_i1"><text>-</text></inputEntry>
+        <inputEntry id="r4_i2"><text>-</text></inputEntry>
+        <inputEntry id="r4_i3"><text>-</text></inputEntry>
+        <outputEntry id="r4_o1"><text>"STD"</text></outputEntry>
+        <outputEntry id="r4_o2"><text>false</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

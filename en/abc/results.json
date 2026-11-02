@@ -1,0 +1,86 @@
+{
+ "resources_total": 13064,
+ "cost_per_tonne": 38.0,
+ "reconciled_total": 13065,
+ "volume": {
+  "Standard shipment (5 pieces, 150 kg)": 2220,
+  "Dangerous goods (2 pieces, 60 kg)": 180
+ },
+ "drivers": {
+  "Cargo acceptance": [
+   11460,
+   "cargo pieces"
+  ],
+  "ULD build-up": [
+   467.4,
+   "ULD"
+  ],
+  "Special cargo handling": [
+   180,
+   "special shipments"
+  ],
+  "Document checking": [
+   3204.0,
+   "checks"
+  ],
+  "Document correction": [
+   699.0,
+   "corrections"
+  ],
+  "Customs clearance": [
+   2400,
+   "declarations"
+  ],
+  "Screening": [
+   552.0,
+   "screening hours"
+  ]
+ },
+ "activity_cost": {
+  "Cargo acceptance": 4158,
+  "ULD build-up": 2979,
+  "Special cargo handling": 570,
+  "Document checking": 1960,
+  "Document correction": 612,
+  "Customs clearance": 735,
+  "Screening": 2050
+ },
+ "driver_rate": {
+  "Cargo acceptance": [
+   0.36,
+   "cargo pieces"
+  ],
+  "ULD build-up": [
+   6.37,
+   "ULD"
+  ],
+  "Special cargo handling": [
+   3.17,
+   "special shipments"
+  ],
+  "Document checking": [
+   0.61,
+   "checks"
+  ],
+  "Document correction": [
+   0.88,
+   "corrections"
+  ],
+  "Customs clearance": [
+   0.31,
+   "declarations"
+  ],
+  "Screening": [
+   3.71,
+   "screening hours"
+  ]
+ },
+ "abc_cost": {
+  "Standard shipment (5 pieces, 150 kg)": 4.9,
+  "Dangerous goods (2 pieces, 60 kg)": 12.15
+ },
+ "traditional_cost": {
+  "Standard shipment (5 pieces, 150 kg)": 5.7,
+  "Dangerous goods (2 pieces, 60 kg)": 2.28
+ }
+}

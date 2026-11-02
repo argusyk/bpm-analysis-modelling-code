@@ -1,0 +1,45 @@
+{
+ "level": {
+  "Strategic alignment": 3.0,
+  "Governance": 1.67,
+  "Methods": 2.33,
+  "Information technology": 1.33,
+  "People": 2.33,
+  "Culture": 2.33
+ },
+ "index": 2.17,
+ "target": {
+  "Strategic alignment": 4,
+  "Governance": 3.5,
+  "Methods": 3.5,
+  "Information technology": 3.5,
+  "People": 3,
+  "Culture": 3
+ },
+ "gaps": [
+  [
+   2.17,
+   "Information technology"
+  ],
+  [
+   1.83,
+   "Governance"
+  ],
+  [
+   1.17,
+   "Methods"
+  ],
+  [
+   1.0,
+   "Strategic alignment"
+  ],
+  [
+   0.67,
+   "People"
+  ],
+  [
+   0.67,
+   "Culture"
+  ]
+ ]
+}

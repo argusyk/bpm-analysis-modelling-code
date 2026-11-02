@@ -1,0 +1,140 @@
+{
+ "cases": 400,
+ "events": 2146,
+ "status": {
+  "complete": 369,
+  "unsuccessful": 31
+ },
+ "variants": 15,
+ "top_variants": [
+  [
+   "Tender announced > Enquiry period ended > Bid submission deadline > Winner awarded > Contract signed",
+   242
+  ],
+  [
+   "Tender announced > Enquiry period ended > Bid submission deadline > Auction held > Winner awarded > Contract signed",
+   93
+  ],
+  [
+   "Tender announced > Enquiry period ended > Bid submission deadline > Tender unsuccessful",
+   31
+  ]
+ ],
+ "days_to_contract": {
+  "median": 20.9,
+  "mean": 24.2,
+  "p90": 33.7
+ },
+ "stage_median_days": {
+  "announcement -> bid deadline": 8.0,
+  "bid deadline -> auction": 1.1,
+  "auction -> winner": 4.0,
+  "winner -> contract": 10.2
+ },
+ "share_auction": 0.312,
+ "share_complaint": 0.02,
+ "share_rejection": 0.072,
+ "median_days_with_complaint": 47.0,
+ "median_days_without_complaint": 20.9,
+ "median_days_with_rejection": 26.0,
+ "median_days_without_rejection": 20.9,
+ "bids": {
+  "0": 31,
+  "1": 242,
+  "2": 74,
+  "3": 26,
+  "4": 17,
+  "5": 3,
+  "6": 2,
+  "7": 4,
+  "9": 1
+ },
+ "median_bids": 1.0,
+ "single_bid_share": 0.605,
+ "dfg": [
+  [
+   "Enquiry period ended",
+   "Bid submission deadline",
+   400
+  ],
+  [
+   "Tender announced",
+   "Enquiry period ended",
+   400
+  ],
+  [
+   "Winner awarded",
+   "Contract signed",
+   367
+  ],
+  [
+   "Bid submission deadline",
+   "Winner awarded",
+   244
+  ],
+  [
+   "Bid submission deadline",
+   "Auction held",
+   125
+  ],
+  [
+   "Auction held",
+   "Winner awarded",
+   94
+  ],
+  [
+   "Bid submission deadline",
+   "Tender unsuccessful",
+   31
+  ],
+  [
+   "Auction held",
+   "Bid rejected",
+   27
+  ],
+  [
+   "Bid rejected",
+   "Winner awarded",
+   27
+  ],
+  [
+   "Auction held",
+   "Complaint submitted",
+   4
+  ],
+  [
+   "Bid rejected",
+   "Bid rejected",
+   4
+  ],
+  [
+   "Complaint submitted",
+   "Winner awarded",
+   4
+  ],
+  [
+   "Contract signed",
+   "Contract signed",
+   4
+  ],
+  [
+   "Winner awarded",
+   "Winner awarded",
+   4
+  ]
+ ],
+ "dur_hist_days": [
+  0,
+  3,
+  189,
+  111,
+  40,
+  14,
+  5,
+  2,
+  1,
+  1,
+  0,
+  2
+ ]
+}

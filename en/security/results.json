@@ -1,0 +1,30 @@
+{
+ "current roles": {
+  "cases": 500,
+  "violations": 155,
+  "cases_with_violation": 155,
+  "violation_rate": 0.31,
+  "by_rule": {
+   "Approve purchase requisition / Confirm receipt of goods": 84,
+   "Create purchase requisition / Approve purchase requisition": 71
+  },
+  "by_person": {
+   "manager_02": 84,
+   "manager_01": 71
+  }
+ },
+ "redesigned roles": {
+  "cases": 500,
+  "violations": 27,
+  "cases_with_violation": 27,
+  "violation_rate": 0.054,
+  "by_rule": {
+   "Create purchase requisition / Approve purchase requisition": 17,
+   "Approve purchase requisition / Confirm receipt of goods": 10
+  },
+  "by_person": {
+   "manager_01": 17,
+   "manager_02": 10
+  }
+ }
+}

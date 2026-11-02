@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="defs_aerocargo_asis" targetNamespace="http://aerocargo.example/bpmn">
+  <collaboration id="collab_aerocargo_asis"><participant id="part_aerocargo_asis" name="АероКарго Сервіс" processRef="aerocargo_asis"/></collaboration>
+  <process id="aerocargo_asis" name="Приймання та обробка експортної відправки (як є)" isExecutable="false">
+    <laneSet id="ls1">
+      <lane id="L_com" name="Комерційний відділ"><flowNodeRef>S</flowNodeRef><flowNodeRef>T_confirm</flowNodeRef><flowNodeRef>T_fix</flowNodeRef><flowNodeRef>E_fixed</flowNodeRef></lane>
+      <lane id="L_doc" name="Служба документації"><flowNodeRef>G_merge</flowNodeRef><flowNodeRef>T_check</flowNodeRef><flowNodeRef>G_valid</flowNodeRef><flowNodeRef>T_customs</flowNodeRef></lane>
+      <lane id="L_wh" name="Склад експорту"><flowNodeRef>E_arrived</flowNodeRef><flowNodeRef>T_accept</flowNodeRef><flowNodeRef>T_screen</flowNodeRef></lane>
+      <lane id="L_uld" name="Група ULD"><flowNodeRef>T_uld</flowNodeRef><flowNodeRef>E_end</flowNodeRef></lane>
+    </laneSet>
+    <startEvent id="S" name="Бронювання отримано"><outgoing>f1</outgoing><messageEventDefinition/></startEvent>
+    <userTask id="T_confirm" name="Підтвердити бронювання"><incoming>f1</incoming><outgoing>f2</outgoing></userTask>
+    <intermediateCatchEvent id="E_arrived" name="Вантаж доставлено"><incoming>f2</incoming><outgoing>f3</outgoing><messageEventDefinition/></intermediateCatchEvent>
+    <userTask id="T_accept" name="Прийняти вантаж"><incoming>f3</incoming><outgoing>f4</outgoing></userTask>
+    <exclusiveGateway id="G_merge" name=""><incoming>f4</incoming><incoming>f8</incoming><outgoing>f4b</outgoing></exclusiveGateway>
+    <userTask id="T_check" name="Перевірити дані e-AWB"><incoming>f4b</incoming><outgoing>f5</outgoing></userTask>
+    <exclusiveGateway id="G_valid" name="Дані коректні?"><incoming>f5</incoming><outgoing>f6</outgoing><outgoing>f9</outgoing></exclusiveGateway>
+    <sendTask id="T_fix" name="Запросити виправлення"><incoming>f6</incoming><outgoing>f7</outgoing></sendTask>
+    <intermediateCatchEvent id="E_fixed" name="Виправлення отримано"><incoming>f7</incoming><outgoing>f8</outgoing><messageEventDefinition/></intermediateCatchEvent>
+    <userTask id="T_screen" name="Пройти скринінг"><incoming>f9</incoming><outgoing>f10</outgoing></userTask>
+    <userTask id="T_customs" name="Отримати митний дозвіл"><incoming>f10</incoming><outgoing>f11</outgoing></userTask>
+    <manualTask id="T_uld" name="Передати ULD"><incoming>f11</incoming><outgoing>f12</outgoing></manualTask>
+    <endEvent id="E_end" name="Відправку передано перевізнику"><incoming>f12</incoming></endEvent>
+    <sequenceFlow id="f1" name="" sourceRef="S" targetRef="T_confirm"></sequenceFlow>
+    <sequenceFlow id="f2" name="" sourceRef="T_confirm" targetRef="E_arrived"></sequenceFlow>
+    <sequenceFlow id="f3" name="" sourceRef="E_arrived" targetRef="T_accept"></sequenceFlow>
+    <sequenceFlow id="f4" name="" sourceRef="T_accept" targetRef="G_merge"></sequenceFlow>
+    <sequenceFlow id="f4b" name="" sourceRef="G_merge" targetRef="T_check"></sequenceFlow>
+    <sequenceFlow id="f5" name="" sourceRef="T_check" targetRef="G_valid"></sequenceFlow>
+    <sequenceFlow id="f6" name="ні" sourceRef="G_valid" targetRef="T_fix"><conditionExpression xsi:type="tFormalExpression">${not awbValid}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="f7" name="" sourceRef="T_fix" targetRef="E_fixed"></sequenceFlow>
+    <sequenceFlow id="f8" name="" sourceRef="E_fixed" targetRef="G_merge"></sequenceFlow>
+    <sequenceFlow id="f9" name="так" sourceRef="G_valid" targetRef="T_screen"><conditionExpression xsi:type="tFormalExpression">${awbValid}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="f10" name="" sourceRef="T_screen" targetRef="T_customs"></sequenceFlow>
+    <sequenceFlow id="f11" name="" sourceRef="T_customs" targetRef="T_uld"></sequenceFlow>
+    <sequenceFlow id="f12" name="" sourceRef="T_uld" targetRef="E_end"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="dia_aerocargo_asis"><bpmndi:BPMNPlane id="plane_aerocargo_asis" bpmnElement="collab_aerocargo_asis">
+    <bpmndi:BPMNShape id="part_aerocargo_asis_di" bpmnElement="part_aerocargo_asis" isHorizontal="true"><dc:Bounds x="160" y="80" width="1550" height="600"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_com_di" bpmnElement="L_com" isHorizontal="true"><dc:Bounds x="190" y="80" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_doc_di" bpmnElement="L_doc" isHorizontal="true"><dc:Bounds x="190" y="230" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_wh_di" bpmnElement="L_wh" isHorizontal="true"><dc:Bounds x="190" y="380" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_uld_di" bpmnElement="L_uld" isHorizontal="true"><dc:Bounds x="190" y="530" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="242" y="137" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_confirm_di" bpmnElement="T_confirm"><dc:Bounds x="315" y="120" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="E_arrived_di" bpmnElement="E_arrived"><dc:Bounds x="482" y="437" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_accept_di" bpmnElement="T_accept"><dc:Bounds x="555" y="420" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="G_merge_di" bpmnElement="G_merge"><dc:Bounds x="675" y="280" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_check_di" bpmnElement="T_check"><dc:Bounds x="735" y="270" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="G_valid_di" bpmnElement="G_valid"><dc:Bounds x="875" y="280" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_fix_di" bpmnElement="T_fix"><dc:Bounds x="845" y="120" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="E_fixed_di" bpmnElement="E_fixed"><dc:Bounds x="682" y="137" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_screen_di" bpmnElement="T_screen"><dc:Bounds x="965" y="420" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_customs_di" bpmnElement="T_customs"><dc:Bounds x="1115" y="270" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="T_uld_di" bpmnElement="T_uld"><dc:Bounds x="1275" y="570" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="E_end_di" bpmnElement="E_end"><dc:Bounds x="1452" y="587" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="278" y="155"/><di:waypoint x="315" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="425" y="155"/><di:waypoint x="454" y="155"/><di:waypoint x="454" y="455"/><di:waypoint x="482" y="455"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="518" y="455"/><di:waypoint x="555" y="455"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f4_di" bpmnElement="f4"><di:waypoint x="665" y="455"/><di:waypoint x="670" y="455"/><di:waypoint x="670" y="305"/><di:waypoint x="675" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f4b_di" bpmnElement="f4b"><di:waypoint x="725" y="305"/><di:waypoint x="735" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="845" y="305"/><di:waypoint x="875" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f6_di" bpmnElement="f6"><di:waypoint x="925" y="305"/><di:waypoint x="885" y="305"/><di:waypoint x="885" y="155"/><di:waypoint x="845" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f7_di" bpmnElement="f7"><di:waypoint x="900" y="120"/><di:waypoint x="900" y="90"/><di:waypoint x="700" y="90"/><di:waypoint x="700" y="137"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f8_di" bpmnElement="f8"><di:waypoint x="718" y="155"/><di:waypoint x="696" y="155"/><di:waypoint x="696" y="305"/><di:waypoint x="675" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f9_di" bpmnElement="f9"><di:waypoint x="925" y="305"/><di:waypoint x="945" y="305"/><di:waypoint x="945" y="455"/><di:waypoint x="965" y="455"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10"><di:waypoint x="1075" y="455"/><di:waypoint x="1095" y="455"/><di:waypoint x="1095" y="305"/><di:waypoint x="1115" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11"><di:waypoint x="1225" y="305"/><di:waypoint x="1250" y="305"/><di:waypoint x="1250" y="605"/><di:waypoint x="1275" y="605"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12"><di:waypoint x="1385" y="605"/><di:waypoint x="1452" y="605"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</definitions>

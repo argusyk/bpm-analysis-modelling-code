@@ -1,0 +1,8 @@
+# versions on which all supplement programs were tested (Python 3.14)
+pm4py==2.7.23.10
+simpy==4.1.2
+pandas==3.0.6
+numpy==2.5.2
+# optional: the agent and the Camunda 8 practicum
+# anthropic>=1.8
+# pyzeebe

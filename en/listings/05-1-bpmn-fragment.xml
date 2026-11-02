@@ -1,0 +1,18 @@
+<!-- Listing from Section 5.14 of the textbook “Fundamentals of Business Process Analysis and Modelling in IT”. -->
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="aerocargo-export" targetNamespace="http://aerocargo.example/bpmn">
+  <process id="checkDocuments" name="Check documents" isExecutable="true">
+    <startEvent id="start" />
+    <sequenceFlow id="f1" sourceRef="start" targetRef="checkAwb" />
+    <userTask id="checkAwb" name="Check e-AWB data" />
+    <sequenceFlow id="f2" sourceRef="checkAwb" targetRef="gwValid" />
+    <exclusiveGateway id="gwValid" name="Data correct?" default="fNo" />
+    <sequenceFlow id="fYes" name="yes" sourceRef="gwValid" targetRef="endOk">
+      <conditionExpression xsi:type="tFormalExpression">=awbValid</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="fNo" name="no" sourceRef="gwValid" targetRef="requestFix" />
+    <sendTask id="requestFix" name="Request correction" />
+    <endEvent id="endOk" name="Documents checked" />
+  </process>
+</definitions>

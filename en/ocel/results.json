@@ -1,0 +1,53 @@
+{
+ "events": 2001,
+ "objects": {
+  "delivery": 375,
+  "requisition": 300,
+  "order": 288,
+  "invoice": 246
+ },
+ "relations": 3615,
+ "flattening": {
+  "requisition": {
+   "rows": 888,
+   "unique_events": 888,
+   "activities": 3
+  },
+  "order": {
+   "rows": 1239,
+   "unique_events": 1155,
+   "activities": 4
+  },
+  "delivery": {
+   "rows": 750,
+   "unique_events": 621,
+   "activities": 2
+  },
+  "invoice": {
+   "rows": 738,
+   "unique_events": 738,
+   "activities": 3
+  }
+ },
+ "match_events": 246,
+ "match_events_two_orders": 42,
+ "ocdfg_edges": {
+  "requisition": {
+   "Create requisition -> Approve requisition": 300,
+   "Approve requisition -> Create order": 288
+  },
+  "order": {
+   "Create order -> Receive delivery": 288,
+   "Receive delivery -> Receive invoice": 288,
+   "Receive invoice -> Match invoice": 246,
+   "Receive delivery -> Receive delivery": 87
+  },
+  "invoice": {
+   "Receive invoice -> Match invoice": 246,
+   "Match invoice -> Pay invoice": 246
+  },
+  "delivery": {
+   "Receive delivery -> Match invoice": 375
+  }
+ }
+}

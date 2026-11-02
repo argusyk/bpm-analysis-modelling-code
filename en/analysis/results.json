@@ -1,0 +1,104 @@
+{
+ "cases": 1000,
+ "events": 8405,
+ "variants": 23,
+ "top_variant_share": 0.632,
+ "ct_mean_h": 6.46,
+ "ct_median_h": 5.88,
+ "ct_p90_h": 10.39,
+ "ct_hist": [
+  0,
+  5,
+  50,
+  138,
+  164,
+  156,
+  142,
+  102,
+  84,
+  43,
+  37,
+  29,
+  17,
+  14,
+  8,
+  2
+ ],
+ "rework_share": 0.311,
+ "escalation_share": 0.029,
+ "parallel_share": 0.033,
+ "ct_mean_parallel_h": 5.79,
+ "ct_mean_sequential_h": 6.48,
+ "dfg_top": [
+  [
+   "Accept cargo",
+   "Check e-AWB data",
+   1000
+  ],
+  [
+   "Cargo delivered",
+   "Accept cargo",
+   1000
+  ],
+  [
+   "Confirm booking",
+   "Cargo delivered",
+   1000
+  ],
+  [
+   "Check e-AWB data",
+   "Pass screening",
+   967
+  ],
+  [
+   "Pass screening",
+   "Obtain customs release",
+   967
+  ],
+  [
+   "Obtain customs release",
+   "Hand over ULD",
+   966
+  ],
+  [
+   "Check e-AWB data",
+   "Request correction",
+   432
+  ],
+  [
+   "Receive correction",
+   "Check e-AWB data",
+   432
+  ],
+  [
+   "Request correction",
+   "Receive correction",
+   403
+  ],
+  [
+   "Repack",
+   "Pass screening",
+   40
+  ],
+  [
+   "Pass screening",
+   "Repack",
+   39
+  ],
+  [
+   "Pass screening",
+   "Hand over ULD",
+   34
+  ]
+ ],
+ "discovered_fitness": 1.0,
+ "discovered_precision": 0.757,
+ "asis_fitness": 0.991,
+ "asis_fit_traces_share": 0.928,
+ "activities_outside_model": [
+  "Cargo delivered",
+  "Escalate to shift supervisor",
+  "Receive correction",
+  "Repack"
+ ]
+}

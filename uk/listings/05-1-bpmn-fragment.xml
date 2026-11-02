@@ -1,0 +1,18 @@
+<!-- Лістинг з підрозділу 5.14 посібника «Основи аналізу та моделювання бізнес-процесів в ІТ». -->
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="aerocargo-export" targetNamespace="http://aerocargo.example/bpmn">
+  <process id="checkDocuments" name="Перевірити документи" isExecutable="true">
+    <startEvent id="start" />
+    <sequenceFlow id="f1" sourceRef="start" targetRef="checkAwb" />
+    <userTask id="checkAwb" name="Перевірити дані e-AWB" />
+    <sequenceFlow id="f2" sourceRef="checkAwb" targetRef="gwValid" />
+    <exclusiveGateway id="gwValid" name="Дані коректні?" default="fNo" />
+    <sequenceFlow id="fYes" name="так" sourceRef="gwValid" targetRef="endOk">
+      <conditionExpression xsi:type="tFormalExpression">=awbValid</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="fNo" name="ні" sourceRef="gwValid" targetRef="requestFix" />
+    <sendTask id="requestFix" name="Запросити виправлення" />
+    <endEvent id="endOk" name="Документи перевірено" />
+  </process>
+</definitions>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="defs_deadlock_demo" targetNamespace="http://aerocargo.example/bpmn">
+  <collaboration id="collab_deadlock_demo"><participant id="part_deadlock_demo" name="АероКарго Сервіс" processRef="deadlock_demo"/></collaboration>
+  <process id="deadlock_demo" name="Приклад тупика: XOR-розгалуження і AND-злиття" isExecutable="false">
+    <laneSet id="ls1">
+      <lane id="L1" name="Виконавець 1"><flowNodeRef>S</flowNodeRef><flowNodeRef>G1</flowNodeRef><flowNodeRef>A</flowNodeRef><flowNodeRef>G2</flowNodeRef><flowNodeRef>E</flowNodeRef></lane>
+      <lane id="L2" name="Виконавець 2"><flowNodeRef>B</flowNodeRef></lane>
+    </laneSet>
+    <startEvent id="S" name="Старт"><outgoing>f1</outgoing></startEvent>
+    <exclusiveGateway id="G1" name="Умова?"><incoming>f1</incoming><outgoing>f2</outgoing><outgoing>f3</outgoing></exclusiveGateway>
+    <userTask id="A" name="Дія A"><incoming>f2</incoming><outgoing>f4</outgoing></userTask>
+    <userTask id="B" name="Дія B"><incoming>f3</incoming><outgoing>f5</outgoing></userTask>
+    <parallelGateway id="G2" name=""><incoming>f4</incoming><incoming>f5</incoming><outgoing>f6</outgoing></parallelGateway>
+    <endEvent id="E" name="Кінець"><incoming>f6</incoming></endEvent>
+    <sequenceFlow id="f1" name="" sourceRef="S" targetRef="G1"></sequenceFlow>
+    <sequenceFlow id="f2" name="так" sourceRef="G1" targetRef="A"><conditionExpression xsi:type="tFormalExpression">${c}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="f3" name="ні" sourceRef="G1" targetRef="B"><conditionExpression xsi:type="tFormalExpression">${not c}</conditionExpression></sequenceFlow>
+    <sequenceFlow id="f4" name="" sourceRef="A" targetRef="G2"></sequenceFlow>
+    <sequenceFlow id="f5" name="" sourceRef="B" targetRef="G2"></sequenceFlow>
+    <sequenceFlow id="f6" name="" sourceRef="G2" targetRef="E"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="dia_deadlock_demo"><bpmndi:BPMNPlane id="plane_deadlock_demo" bpmnElement="collab_deadlock_demo">
+    <bpmndi:BPMNShape id="part_deadlock_demo_di" bpmnElement="part_deadlock_demo" isHorizontal="true"><dc:Bounds x="160" y="80" width="1550" height="300"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L1_di" bpmnElement="L1" isHorizontal="true"><dc:Bounds x="190" y="80" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L2_di" bpmnElement="L2" isHorizontal="true"><dc:Bounds x="190" y="230" width="1520" height="150"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="242" y="137" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="G1_di" bpmnElement="G1"><dc:Bounds x="345" y="130" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="425" y="120" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="B_di" bpmnElement="B"><dc:Bounds x="425" y="270" width="110" height="70"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="G2_di" bpmnElement="G2"><dc:Bounds x="575" y="130" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="E_di" bpmnElement="E"><dc:Bounds x="682" y="137" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="f1_di" bpmnElement="f1"><di:waypoint x="278" y="155"/><di:waypoint x="345" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f2_di" bpmnElement="f2"><di:waypoint x="395" y="155"/><di:waypoint x="425" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f3_di" bpmnElement="f3"><di:waypoint x="395" y="155"/><di:waypoint x="410" y="155"/><di:waypoint x="410" y="305"/><di:waypoint x="425" y="305"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f4_di" bpmnElement="f4"><di:waypoint x="535" y="155"/><di:waypoint x="575" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f5_di" bpmnElement="f5"><di:waypoint x="535" y="305"/><di:waypoint x="555" y="305"/><di:waypoint x="555" y="155"/><di:waypoint x="575" y="155"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f6_di" bpmnElement="f6"><di:waypoint x="625" y="155"/><di:waypoint x="682" y="155"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</definitions>
